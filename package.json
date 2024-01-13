@@ -4,7 +4,8 @@
   "description": "Exciting New Themes",
   "version": "0.1.0",
   "publisher": "codeeasy",
-  "logo": "./logo.png",
+  "icon": "logo.png",
+  "logo": "logo.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/Parvsharma04/codeeasy"
