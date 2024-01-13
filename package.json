@@ -1,0 +1,26 @@
+{
+  "name": "codeeasy-themes",
+  "displayName": "Codeeasy themes",
+  "description": "Exciting New Themes",
+  "version": "0.0.1",
+  "publisher": "codeeasy",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "label": "Codeeasy Themes",
+        "uiTheme": "vs-dark",
+        "path": "./themes/Codeeasy Themes-color-theme.json"
+      }
+    ]
+  }
+}
