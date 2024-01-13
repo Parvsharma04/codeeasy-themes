@@ -6,8 +6,17 @@
   "publisher": "codeeasy",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/Parvsharma04/codeeasy"
   },
+  "keywords": [
+    "theme",
+    "themes",
+    "codeeasy",
+    "codeeasy theme",
+    "Codeeasy themes",
+    "dark themes",
+    "dark"
+  ],
   "engines": {
     "vscode": "^1.85.0"
   },
