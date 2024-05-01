@@ -169,8 +169,141 @@ div class="container">
         <% } %>
     /div
 
+## BLOGAPP
+const express = require('express');
+const multer = require('multer');
+const fs = require('fs');       
+const path = require('path');
+
+const app = express();
+const port = 4000;
+
+app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
+
+const storage = multer.diskStorage({
+    destination: './public/images/',
+    filename: function (req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    }
+});
+
+const upload = multer({ storage: storage }).single('image');
+
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/dashboard.html');
+});
+
+app.get('/add-article', (req, res) => {
+    res.sendFile(__dirname + '/add-article.html');
+});
+
+app.post('/upload', (req, res) => {
+    upload(req, res, (err) => {
+        if (err) {
+            console.log(err);
+            res.send('Error uploading file.');
+        } else {
+            const { title, content } = req.body;
+            let image = '';
+            if (req.file && req.file.filename) {
+                image = req.file.filename;
+            } else {
+                res.status(400).send('No file uploaded.');
+                return;
+            }
+
+            const article = { title, content, image };
+            let articles = [];
+            if (fs.existsSync('article.json')) {
+                articles = JSON.parse(fs.readFileSync('article.json', 'utf-8'));
+            }
+
+            articles.push(article);
+
+            fs.writeFileSync('article.json', JSON.stringify(articles, null, 2));
+
+            res.redirect('/');
+        }
+    });
+});
+
+app.listen(port, () => {
+    console.log(Server is running on http://localhost:${port});
+});
+
+## ATTENDANCE QUESTION
+const express = require('express')
+const app = express()
+const fs = require('fs')
+const data = require('./attendance.json')
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
+app.get('/attendance/:id/:attend',(req,res)=>{
+    const id = req.params.id
+    const attend = req.params.attend
+    const obj = {
+        roolno : id,
+        attendance : attend
+    }
+  const x =   data.find(e=>{
+        return e.roolno ==  id;
+    })
+    console.log(x);
+    console.log(data)
+    console.log(obj);
+    if(!x){
+        data.push(obj)
+    }
+    fs.writeFileSync('./attendance.jsonlJSON.stringify(data));
+})
+app.listen(8080)
 
 
+## multer 2
+
+const express = require('express');
+const multer = require('multer');
+const path = require('path');
+
+const app = express();
+
+app.get('/upload', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'upload.html'));
+})
+ Define storage for uploaded files
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+         Set the destination directory where uploaded files will be stored
+        cb(null, 'uploads/');
+    },
+    filename: function (req, file, cb) {
+        // Set the filename for uploaded files
+        cb(null, Date.now() + path.extname(file.originalname));
+    }
+});
+
+ Create multer instance with defined storage
+const upload = multer({ storage: storage });
+ Route to handle file upload
+app.post('/upload', upload.array('file'), (req, res) => {
+     Access uploaded file information
+    const uploadedFile = req.file;
+    if (!uploadedFile) {
+        res.status(400).send('No file uploaded');
+    } else {
+        res.send('File uploaded successfully');
+    }
+});
+
+ Serve uploaded files statically
+app.use('/uploads', express.static('uploads'));
+
+ Start the server
+const PORT = 3000;
+app.listen(PORT, () => {
+    console.log(Server is running on port ${PORT});
+});
 ## Cheat
 
 TO-DO APP STORAGE
