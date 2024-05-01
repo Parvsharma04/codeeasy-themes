@@ -6,6 +6,34 @@
 
 Welcome to CodeEasy Themes, a collection of visually pleasing and easy-to-read themes for Visual Studio Code. This extension provides a variety of carefully crafted color schemes to enhance your coding experience and make your code more readable.
 
+
+## Multer
+
+const express = require('express')
+const multer = require('multer')
+const app = express()
+const storage = multer.diskStorage({
+    destination: function(req, file, cb){
+        cb(null, 'upload/')
+    },
+    filename: function(req, file, cb){
+        cb(null, file.originalname)
+    },
+})
+const upload = multer({storage})
+
+app.listen(3000, ()=>{
+    console.log('server online')
+})
+
+app.get('/', (req, res)=>{
+    res.render('form.ejs')
+})
+
+app.post('/submit', upload.single('photo'), (req, res)=>{
+    res.json(req.file)
+})
+
 ## Installation
 
 1. Launch Visual Studio Code.
