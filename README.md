@@ -34,15 +34,15 @@ app.post('/submit', upload.single('photo'), (req, res)=>{
     res.json(req.file)
 })
 
-##cheat
+## Cheat
 
-TO-DO APP (STORAGE)
-
+TO-DO APP STORAGE
 let container = document.getElementById('text');
 let input = document.getElementById('input');
 let addButton = document.getElementById('add');
 
-//function to add key and values in localstorage
+function to add key and values in localstorage
+
 const addLocalValues = (key, value) => {
     let newContainer = document.createElement('div');
     newContainer.setAttribute('id', 'newContainer');
@@ -65,12 +65,13 @@ const addLocalValues = (key, value) => {
     newButton.setAttribute('id', 'newButton');
     newButton.innerHTML = '<i class="fa-solid fa-trash fa-bounce fa-2xl" style="color: black;"></i>';
 
-    // Set the checkbox's checked property based on the value from localStorage
+    Set the checkbox's checked property based on the value from localStorage
     let isChecked = localStorage.getItem(key) === "true";
     newCheck.checked = isChecked;
     left.innerHTML = key;
     newContainer.appendChild(left);
-    // update the task is done or not
+
+    update the task is done or not
     right.appendChild(newPencil);
     right.appendChild(newCheck);
     right.appendChild(newButton);
@@ -80,18 +81,15 @@ const addLocalValues = (key, value) => {
     container.appendChild(newContainer);
 
     newButton.addEventListener('click', () => {
-        localStorage.removeItem(key); // Use the key, not innerText
+        localStorage.removeItem(key);        Use the key, not innerText
         container.removeChild(newContainer);
     })
 }
 
-//function to check whether localStorage is empty or not
+function to check whether localStorage is empty or not
 if (localStorage.length != 0) {
     for (let i = 0; i < localStorage.length; i++) {
-        addLocalValues(Object.keys(localStorage)[i], Object.values(localStorage)[i]);
-        // console.log(Object.keys(localStorage)[i], Object.values(localStorage)[i]);
-        // console.log(Object.keys(localStorage)[i]);
-        // console.log(Object.values(localStorage)[i]);        
+        addLocalValues(Object.keys(localStorage)[i], Object.values(localStorage)[i]);   
     }
 }
 
@@ -124,7 +122,7 @@ input.addEventListener('keypress', (e) => {
         newContainer.appendChild(right);
         container.appendChild(newContainer);
 
-        //adding to local Storage
+        adding to local Storage
         localStorage.setItem(input.value, false);
         input.value = "";
 
@@ -135,7 +133,7 @@ input.addEventListener('keypress', (e) => {
     }
 })
 
-// function to update localStorage on the based on task complete
+function to update localStorage on the based on task complete
 container.addEventListener('change', (e) => {
     if (e.target.type === 'checkbox') {
         const isChecked = e.target.checked;
@@ -144,23 +142,23 @@ container.addEventListener('change', (e) => {
     }
 });
 
-//function to edit div text by using pencil symbol
+function to edit div text by using pencil symbol
 container.addEventListener('click', (e) => {
     if (e.target.id === 'newPencil') {
         const taskContainer = e.target.parentElement.parentElement.parentElement;
         const taskTextElement = taskContainer.querySelector('#left');
-        // Store the old value before editing
+        Store the old value before editing
         const oldValue = taskTextElement.textContent;
         taskTextElement.contentEditable = true;
         taskTextElement.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 taskTextElement.contentEditable = false;
                 const newValue = taskTextElement.textContent;
-                // Remove the old value from localStorage
+                Remove the old value from localStorage
                 localStorage.removeItem(oldValue);
-                // Set the updated value in localStorage
+                Set the updated value in localStorage
                 localStorage.setItem(newValue, false);
-                // Update the task text content
+                Update the task text content
                 taskTextElement.textContent = newValue;
             }
         });
@@ -198,7 +196,7 @@ addButton.addEventListener('click', (e) => {
         newContainer.appendChild(right);
         container.appendChild(newContainer);
 
-        //adding to local Storage
+        adding to local Storage
         localStorage.setItem(input.value, false);
         input.value = "";
 
@@ -207,7 +205,7 @@ addButton.addEventListener('click', (e) => {
             container.removeChild(newContainer);
         })
     }
-    // function to update localStorage on the based on task complete
+    function to update localStorage on the based on task complete
     const list = document.querySelectorAll("input[type=checkbox]");
 
     for (const checkbox of list) {
@@ -218,7 +216,7 @@ addButton.addEventListener('click', (e) => {
             localStorage.setItem(textContent, isChecked);
         });
 
-        // Initialize the checkbox state based on localStorage
+        Initialize the checkbox state based on localStorage
         const textContent = checkbox.parentElement.parentElement.textContent;
         const isChecked = localStorage.getItem(textContent) === 'true';
 
@@ -269,7 +267,7 @@ async function fetchData() {
 
         totalQuestions.innerText = No of Questions : ${reqQuestion}
 
-        // setting up the questions and answers        
+        setting up the questions and answers        
         setQuestion(quizData.data[currentQuestionIndex]);
 
         nextBtn.addEventListener('click', () => {
@@ -968,6 +966,8 @@ try{
 catch(err){
   console.log("Unable to start server...")
 }
+
+
 ## Installation
 
 1. Launch Visual Studio Code.
