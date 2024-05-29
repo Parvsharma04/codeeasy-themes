@@ -32,6 +32,12 @@
         "uiTheme": "vs-dark",
         "path": "./themes/Codeeasy Themes-color-theme.json"
       }
+    ],
+    "snippets": [
+      {
+        "language": "javascript",
+        "path": "./snippets/snippets.json"
+      }
     ]
   }
 }
